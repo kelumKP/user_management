@@ -2,7 +2,7 @@
 
 Welcome to Activate's Interview Project. This repository provides a foundational template for a modern full-stack application, offering essential functionality to demonstrate best practices and key concepts. Below, you'll find an overview of the project's features, architecture, and instructions for running the application.
 
-Please note, this is used diring our interview process and not intended to be production ready.
+Please note, this is used during our interview process and not intended to be used in production.
 
 ---
 
