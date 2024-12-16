@@ -86,7 +86,7 @@ describe('loginUser', () => {
     const result = await loginUser(loginData);
 
     expect(axios.post).toHaveBeenCalledWith(
-      'http://localhost:5073/api/token',
+      'http://localhost:5074/api/token',
       loginData,
       {
         withCredentials: true,
@@ -104,7 +104,7 @@ describe('loginUser', () => {
     const result = await loginUser(loginData);
 
     expect(axios.post).toHaveBeenCalledWith(
-      'http://localhost:5073/api/token',
+      'http://localhost:5074/api/token',
       loginData,
       {
         withCredentials: true,
@@ -120,7 +120,7 @@ describe('loginUser', () => {
     const result = await loginUser(loginData);
 
     expect(axios.post).toHaveBeenCalledWith(
-      'http://localhost:5073/api/token',
+      'http://localhost:5074/api/token',
       loginData,
       {
         withCredentials: true,
@@ -141,7 +141,7 @@ describe('logoutUser', () => {
     const result = await logoutUser();
 
     expect(axios.delete).toHaveBeenCalledWith(
-      'http://localhost:5073/api/token',
+      'http://localhost:5074/api/token',
       {
         withCredentials: true,
         validateStatus: expect.any(Function),
@@ -158,7 +158,7 @@ describe('logoutUser', () => {
     const result = await logoutUser();
 
     expect(axios.delete).toHaveBeenCalledWith(
-      'http://localhost:5073/api/token',
+      'http://localhost:5074/api/token',
       {
         withCredentials: true,
         validateStatus: expect.any(Function),
@@ -173,7 +173,7 @@ describe('logoutUser', () => {
     const result = await logoutUser();
 
     expect(axios.delete).toHaveBeenCalledWith(
-      'http://localhost:5073/api/token',
+      'http://localhost:5074/api/token',
       {
         withCredentials: true,
         validateStatus: expect.any(Function),
