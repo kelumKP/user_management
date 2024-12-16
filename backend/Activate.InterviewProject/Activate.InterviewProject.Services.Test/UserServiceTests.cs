@@ -177,37 +177,35 @@ namespace Activate.InterviewProject.Services.Test
         }
 
         [TestMethod]
-        public async Task GetAllUsers_ReturnsListOfUsers()
+        public async Task GetAllUsers_ReturnsListOfUsers_Verify()
         {
-            AppUser user = new AppUser
-            (
-                "TestUser",
-                "testuser@test.com",
-                "password",
-                "user"
-            );
-            var userId = new Guid();
-            user.Id = userId;
-
+            // Arrange
+            var userId = Guid.NewGuid();
             var usersList = new List<AppUser>
             {
-                user,
-                new AppUser
-                (
-                    "TestUser2",
-                    "testuser2@test.com",
-                    "password2",
-                    "admin"
-                )
+                new AppUser("TestUser", "password", "testuser@test.com", "user") { Id = userId },
+                new AppUser("TestUser2", "password2", "testuser2@test.com", "admin")
             };
 
             _mockUnitOfWork.Setup(x => x.Users.GetAll()).ReturnsAsync(usersList);
 
-            var result = await _userService.GetAllUsers();
+            // Act
+            var result = (await _userService.GetAllUsers()).ToList();
 
+            // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.AreEqual(user, result.First());
+            Assert.AreEqual(2, result.Count);
+
+            //verify the user details
+            Assert.AreEqual(userId.ToString(), result[0].Id);
+            Assert.AreEqual("TestUser", result[0].Username);
+            Assert.AreEqual("testuser@test.com", result[0].Email);
+            Assert.AreEqual("user", result[0].Role);
+
+            //verify the admin details
+            Assert.AreEqual("TestUser2", result[1].Username);
+            Assert.AreEqual("testuser2@test.com", result[1].Email);
+            Assert.AreEqual("admin", result[1].Role);
         }
 
         [TestMethod]
