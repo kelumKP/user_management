@@ -18,7 +18,7 @@ namespace Activate.InterviewProject.Infrastructure.Repositories
 
         public async Task<IEnumerable<AppUser>> GetNormalUsers()
         {
-            return _dbContext.Users.FromSqlRaw($@"SELECT * FROM ""Users"" u where u.""Role"" <> 'admin'");
+            return _dbContext.Users.FromSqlRaw(@"SELECT * FROM ""Users"" u WHERE u.""Role"" <> 'admin' OR u.""Role"" IS NULL");
         }
 
         public async Task<IEnumerable<AppUser>> GetAdminUsers()

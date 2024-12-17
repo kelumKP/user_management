@@ -44,6 +44,13 @@ const Dashboard = () => {
       setTabIndex(newValue);
     };
   
+ // Refetch all data when a user is updated in the dialog
+  const handleUserUpdate = () => {
+    refetchAll();
+    refetchAdmin();
+    refetchRegular();
+  };
+
     const renderUsersTable = () => {
       if (tabIndex === 0 && !loadingAll && allUsers) {
         return (
@@ -91,7 +98,7 @@ const Dashboard = () => {
         <UserDialog
           selectedUser={selectedUser}
           onClose={() => setSelectedUser(null)}
-          refetch={tabIndex === 0 ? refetchAll : tabIndex === 1 ? refetchAdmin : refetchRegular}
+          refetch={handleUserUpdate}
         />
       </>
     );
