@@ -20,13 +20,13 @@ const UsersTable = ({ data, setSelectedUser, refetch }: Props) => {
             <TableHead>
             <TableRow>
                 {cols.map((col: string) => (
-                    <TableCell>{col}</TableCell>
+                    <TableCell key={col}>{col}</TableCell>
                 ))}
             </TableRow>
             </TableHead>
             <TableBody>
                 {data.map((user: User) => (
-                    <UserRow refetch={refetch} user={user} setSelectedUser={setSelectedUser}/>
+                    <UserRow key={user.id} refetch={refetch} user={user} setSelectedUser={setSelectedUser}/>
                 ))}
             </TableBody>
         </Table>
