@@ -104,6 +104,34 @@ namespace Activate.InterviewProject.Services
             return Convert.ToBoolean(result);
         }
 
+        public async Task<IEnumerable<UserRoles>> GetAllUserRoles()
+        {
+            // Fetch all users from the unit of work
+            var users = await _unitOfWork.Users.GetAll();
 
+            // Use a HashSet to ensure unique roles without requiring Distinct()
+            var roles = new HashSet<(string Value, string Name)>();
+
+            foreach (var user in users)
+            {
+                //null or empty values set to user 
+                if (string.IsNullOrEmpty(user?.Role) || user.Role.Equals("user", StringComparison.OrdinalIgnoreCase))
+                {
+                    roles.Add(("user", "User"));
+                }
+                if (!string.IsNullOrEmpty(user?.Role) && user.Role.Equals("admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    roles.Add(("admin", "Administrator"));
+                }
+            }
+
+            // Map each unique role to a UserRoles instance
+            return roles.Select(role => new UserRoles
+            {
+                Id = Guid.NewGuid().ToString(),
+                Value = role.Value,
+                Name = role.Name
+            });
+        }
     }
 }

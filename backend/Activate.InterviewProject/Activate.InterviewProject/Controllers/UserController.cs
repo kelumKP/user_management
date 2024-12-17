@@ -108,6 +108,15 @@ namespace Activate.InterviewProject.Controllers
             return Ok(userDeleted);
         }
 
-
+        [HttpGet("roles")]
+        public async Task<ActionResult<IEnumerable<UserRoles>>> GetUserRoles()
+        {
+            var roles = await _userService.GetAllUserRoles();
+            if (roles == null || !roles.Any())
+            {
+                return NotFound();
+            }
+            return Ok(roles);
+        }
     }
 }

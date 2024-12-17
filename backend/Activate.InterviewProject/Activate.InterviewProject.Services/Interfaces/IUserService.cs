@@ -23,5 +23,7 @@ namespace Activate.InterviewProject.Services.Interfaces
         Task<bool> UpdateUser(User user);
 
         Task<bool> DeleteUser(Guid userId);
+
+        Task<IEnumerable<UserRoles>> GetAllUserRoles();
     }
 }

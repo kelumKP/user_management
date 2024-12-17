@@ -219,5 +219,33 @@ namespace Activate.InterviewProject.Services.Test
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count());
         }
+
+        [TestMethod]
+        public async Task GetAllUserRoles_ReturnsCorrectRoles()
+        {
+            // Arrange: Set up mock users with different roles
+            var usersList = new List<AppUser>
+            {
+                new AppUser("User1", "user1@example.com", "password1", "user"),
+                new AppUser("User2", "user2@example.com", "password2", "admin"),
+                new AppUser("User3", "user3@example.com", "password3", "user"),
+                // null role, should default to "user"
+                new AppUser("User4", "user4@example.com", "password4", null)
+            };
+
+            // Mock the Users.GetAll() method to return the users list
+            _mockUnitOfWork.Setup(uow => uow.Users.GetAll()).ReturnsAsync(usersList);
+
+            // Act: Call the GetAllUserRoles method
+            var result = (await _userService.GetAllUserRoles()).ToList();
+
+            // Assert: Verify the number of roles returned is correct (2 distinct roles)
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+
+            // Verify the distinct roles returned
+            Assert.IsTrue(result.Any(r => r.Value == "user" && r.Name == "User"));
+            Assert.IsTrue(result.Any(r => r.Value == "admin" && r.Name == "Administrator"));
+        }
     }
 }
