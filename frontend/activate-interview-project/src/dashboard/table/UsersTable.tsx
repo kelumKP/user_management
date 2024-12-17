@@ -16,20 +16,22 @@ const cols = ["Id", "Username", "Email", "Is Admin", "Actions"];
 
 const UsersTable = ({ data, setSelectedUser, refetch }: Props) => {
     return(
-        <Table aria-label="Users table">
-            <TableHead>
-            <TableRow>
-                {cols.map((col: string) => (
-                    <TableCell key={col}>{col}</TableCell>
-                ))}
-            </TableRow>
-            </TableHead>
-            <TableBody>
-                {data.map((user: User) => (
-                    <UserRow key={user.id} refetch={refetch} user={user} setSelectedUser={setSelectedUser}/>
-                ))}
-            </TableBody>
-        </Table>
+        <div className="table-container">
+            <Table aria-label="Users table">
+                <TableHead>
+                <TableRow>
+                    {cols.map((col: string) => (
+                        <TableCell key={col}>{col}</TableCell>
+                    ))}
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                    {data.map((user: User) => (
+                        <UserRow key={user.id} refetch={refetch} user={user} setSelectedUser={setSelectedUser}/>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
     )
 }
 
